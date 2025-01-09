@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>case 1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="case 1.css">
+  
+</head>
+<body>
+    <div class="vertical-lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <div class="header">
+        
+        <a href="index.html" class="word" data-full="oint">p</a>
+        <a href="item.html" class="word" data-full="tem">i</a>
+        <a href="case.html" class="word main">case</a>
+        <a href="studio.html" class="word" data-full=" tudio">s</a>
+        
+    </div>
+    
+    <div class="container">
+        
+
+        <h1> The minimalist interior features<br> serene and contemplative atmosphere</h1>
+
+        <div class="subtitle">
+            <p class="casename">(1)</p>
+            <p class="casename">lee's house</p>
+        </div>
+
+         <div class="image-container" id="image1">
+            <div class="image-wrapper">
+                <img src="./img/case1.png" alt="fern's house">
+            </div>
+        <div class="caption"></div>
+        </div>
+
+        <h2>This minimalist interior photograph is a study in contrasts, where light, shadow, and form converge to create a dynamic and contemplative space. The stark white walls serve as a neutral backdrop, allowing the interplay of light and shadow to take center stage. A large window, bathed in a vibrant orange hue, dominates one wall, casting dramatic shadows across the room. This interplay of light and shadow adds depth and dimension to the space, creating a sense of movement and dynamism.
+
+            The furniture, comprised of sleek black leather pieces, adds another layer of contrast to the composition. The dark forms of the sofa and armchair create a sense of intimacy and enclosure within the otherwise expansive space. </h2>
+
+        <div class="button-wrapper">
+           
+             <a  class="custom-button" href="case.html">( back to case )</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p class="wor">email<br>point@gmail.com</p>
+        <p class="wor" >instagram<br>point_studio</p>
+        <p class="wor ">hung mei liu<br>hung mei liu</p>
+        <p class="wor" >point.<br>since 2025.1.9</p> 
+    </div>
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-circle"></div>
+
+
+    <script>
+
+const dot = document.getElementById('cursor-dot');
+   const circle = document.getElementById('cursor-circle');
+
+   document.addEventListener('mousemove', (e) => {
+   dot.style.left = `${e.clientX}px`;
+   dot.style.top = `${e.clientY}px`;
+
+  circle.style.left = `${e.clientX}px`;
+  circle.style.top = `${e.clientY}px`;
+  });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 字母依序動畫
+        window.addEventListener('load', () => {
+            const letters = document.querySelectorAll('.letter');
+            
+            gsap.to(letters, {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.2,  // 每個字母間隔 0.2 秒
+                ease: "power4.out"
+            });
+
+            gsap.to('.subtitle,.button-wrapper,h1', {
+                opacity: 1,
+                duration: 1,
+                delay: 0.5,  // 等所有字母出現後再顯示副標題
+                ease: "power2.out"
+            });
+        });
+
+        // 圖片滾動動畫
+        gsap.utils.toArray('.image-container').forEach(container => {
+            gsap.to(container, {
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top center",
+                    end: "bottom center",
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
+    </script>
+</body>
+</html>

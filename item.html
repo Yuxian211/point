@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>item</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="item.css">
+  
+</head>
+<body>
+    <div class="vertical-lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <div class="header">
+        <a href="index.html" class="word" data-full="oint">p</a>
+        <a href="item.html" class="word main" >item</a>
+        <a href="case.html" class="word "data-full="ase">c</a>
+        <a href="studio.html" class="word" data-full=" tudio">s</a>
+    </div>
+  
+
+    <div class="container">
+        <div class="title-container">
+            <h1 class="title">
+                <span class="letter">i</span>
+                <span class="letter">t</span>
+                <span class="letter">e</span>
+                <span class="letter">m</span>
+            </h1>
+
+           
+        </div>
+    </div>
+      
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-circle"></div>
+
+    
+
+    <div class="table-container">
+      <table class="item-table">
+          <thead class="item-table-head">
+              <tr>
+                  <th >designer</th>
+                  <th>product</th>
+                  <th>company</th>
+                  <th>date</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr data-image="./img/chair1.png">
+                <td class="hover-text">Stefano</td>
+                <td class="hover-text">Rabbit Chair</td>
+                <td class="hover-text company-cell">Qeeboo</td>
+                <td class="hover-text">2016</td>
+            </tr>
+            <tr data-image="./img/chair2.png">
+                <td class="hover-text">Marcel Breuer</td>
+                <td class="hover-text">Wassily Chair</td>
+                <td class="hover-text company-cell">Thonet</td>
+                <td class="hover-text">1925</td>
+            </tr>
+            <tr data-image="./img/chair3.png">
+                <td class="hover-text">Hans J. Wegner</td>
+                <td class="hover-text">The Chair</td>
+                <td class="hover-text company-cell">Johannes</td>
+                <td class="hover-text">1949</td>
+            </tr>
+            <tr data-image="./img/chair4.png">
+                <td class="hover-text">Lilly Reich</td>
+                <td class="hover-text">Barcelona Chair</td>
+                <td class="hover-text company-cell">Knoll</td>
+                <td class="hover-text">1929</td>
+            </tr>
+            <tr data-image="./img/chair5.png">
+                <td class="hover-text">Michel Ducaroy</td>
+                <td class="hover-text">Togo Sofa</td>
+                <td class="hover-text company-cell">Ligne Roset</td>
+                <td class="hover-text">1973</td>
+          </tbody>
+      </table>
+  </div>
+
+  <img id="hover-image" class="hidden-image" scr="" alt="Hover Image">
+  
+
+  <div class="footer">
+    <p class="wor">email<br>point@gmail.com</p>
+    <p class="wor" >instagram<br>point_studio</p>
+    <p class="wor ">hung mei liu<br>yu xin lin</p>
+    <p class="wor" >point.<br>since 2025.1.9</p> 
+  </div>
+ 
+
+<div id="cursor-dot"></div>
+<div id="cursor-circle"></div>
+
+
+
+    <script>
+
+const dot = document.getElementById('cursor-dot');
+   const circle = document.getElementById('cursor-circle');
+
+   document.addEventListener('mousemove', (e) => {
+   dot.style.left = `${e.clientX}px`;
+   dot.style.top = `${e.clientY}px`;
+
+  circle.style.left = `${e.clientX}px`;
+  circle.style.top = `${e.clientY}px`;
+  });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 字母依序動畫
+        window.addEventListener('load', () => {
+            const letters = document.querySelectorAll('.letter');
+            
+            gsap.to(letters, {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.2,  // 每個字母間隔 0.2 秒
+                ease: "power4.out"
+            });
+
+            gsap.to('.subtitle,.button-wrapper', {
+                opacity: 1,
+                duration: 1,
+                delay: 1.2,  // 等所有字母出現後再顯示副標題
+                ease: "power2.out"
+            });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // 表格動畫
+            document.querySelectorAll('.hover-text').forEach(item => {
+                item.addEventListener('mouseover', () => {
+                    const image = document.getElementById('hover-image');
+                    const tr = item.closest('tr');
+                    const companyCell = tr.querySelector('.company-cell');
+                    const rect = companyCell.getBoundingClientRect();
+                    image.src = tr.getAttribute('data-image'); // 根據 data-image 屬性設置圖片
+                    image.style.display = 'block';
+                    image.style.top = `${rect.top - image.offsetHeight + 480}px`; // 顯示在 company 列文字上方並向下移動 20 像素
+                    image.style.left = `${rect.left}px`;
+
+                    tr.classList.add('hover-highlight');
+                });
+               
+                item.addEventListener('mouseout', () => {
+                    const image = document.getElementById('hover-image');
+                    image.style.display = 'none';
+
+                    const tr = item.closest('tr');
+                    tr.querySelectorAll('td').forEach(td => td.classList.remove('hover-highlight'));
+                });
+            });
+        });
+       
+    </script>
+</body>
+</html>

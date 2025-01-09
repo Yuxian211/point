@@ -1,0 +1,364 @@
+body,html{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw; /* 防止超出螢幕寬度 */
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    
+       
+}
+
+.divider-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 讓線條不干擾其他內容的點擊操作 */
+    z-index: -1; /* 將它放置在所有元素之下 */
+  }
+  
+  .divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px; /* 線條寬度 */
+    background-color: black;
+  }
+  
+  .line1 {
+    left: 25%; /* 第一條線的位置 */
+  }
+  .divider-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* 讓線條不干擾其他內容的點擊操作 */
+}
+
+.divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px; /* 線條寬度 */
+  background-color: black;
+}
+
+.line1 {
+  left: 25%; /* 第一條線的位置 */
+}
+
+.line2 {
+  left: 50%; /* 第二條線的位置 */
+}
+
+.line3 {
+  left: 75%; /* 第三條線的位置 */
+}
+  .line2 {
+    left: 50%; /* 第二條線的位置 */
+  }
+  
+  .line3 {
+    left: 75%; /* 第三條線的位置 */
+  }
+
+
+
+
+  .header {
+    position: fixed; /* 固定在頁面最上方 */
+    z-index: 1000; /* 保證置於其他元素之上 */
+    width: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+   
+    display: flex;
+    justify-content: flex-start; /* 靠左對齊 */
+    align-items: flex-start; /* 靠上對齊 */
+    padding: 50px 0 0 20px; /* 增加左邊和上方的 padding */
+    flex-wrap: nowrap;
+    position: relative;
+    position: fixed;
+    
+  }
+  
+  .main{
+    color: #f88818 !important;
+  }
+  
+  
+  /* 字母樣式 */
+  .word {
+    position: absolute;
+    width: 5px; /* Each item takes up 25% of the container's width */
+    height: 100%; /* Adjust as needed */
+  
+    display: inline-block;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    position: relative;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: color 0.5s ease; /* 字母本身過渡效果 */
+  }
+  
+   .header .word:nth-child(1) {
+    left: 0%;
+   }
+   
+   .header .word:nth-child(2) {
+    left: 25%;
+   }
+   
+   .header .word:nth-child(3) {
+    left: 50%;
+   }
+   
+   .header .word:nth-child(4) {
+    left: 75%;
+   }
+  .word:hover {
+    color: #f88818; /* 滑鼠懸停時改變字母顏色 */
+  }
+  
+  /* 顯示完整單詞 */
+  .word::after {
+    content: attr(data-full); /* 顯示 data-full 的內容 */
+    position: absolute;
+    padding-left: 32px;
+    top: 0; /* 完整單詞與字母對齊 */
+    left: 0;
+    opacity: 0; /* 初始隱藏 */
+    color: #000000;;
+    font-size: 40px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: opacity 0.5s ease, transform 0.5s ease; /* 平滑顯示與移動效果 */
+    transform: translateX(-5px); /* 初始位置向左偏移 */
+  }
+  
+  /* 懸停時動畫效果 */
+  .word:hover::after {
+    opacity: 1; /* 顯示完整單詞 */
+    transform: translateX(0); /* 從左滑入至原始位置 */
+  }
+  
+  
+  /*contant*/
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+  }
+  
+
+
+
+
+.studiosection {
+    position: relative;
+    display: flex; /* 使用 Flexbox */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100vh; /* 設置全頁高度 */
+  }
+
+  .studio{
+    font-size: 170px;
+  }
+ 
+
+
+
+
+  /* section 整體布局 */
+.studio-pic {
+    display: flex;
+    position: relative;
+    
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.container1 {
+    width: 600px;
+    margin: 0 auto; /* 置中對齊 */
+    padding: 0;
+    
+}
+
+/* sdp 區塊布局 */
+.sdp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 200px; /* sdp之間的間距 */
+    
+}
+
+/* 最後一個sdp不需要底部間距 */
+.sdp:last-child {
+    
+    margin-bottom: 0;
+}
+
+/* 圖片樣式 */
+.sdp img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 999; /* 將它放置在所有元素之下 */
+}
+
+/* 文字容器樣式 */
+.words-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin: 0;
+}
+
+/* 文字樣式 */
+.words-container span {
+    font-size: 16px;
+}
+
+/* 特定文字類別樣式 */
+.Liu-hung-mei,
+.Lin-Yu-Xian {
+    text-align: left;
+}
+
+.designer {
+    text-align: right;
+}
+
+
+
+footer {
+  
+  width: 100%;
+  height: 120px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: flex-start; /* 靠左對齊 */
+  align-items: flex-start; /* 靠上對齊 */
+  padding: 50px 0 0 20px; /* 增加左邊和上方的 padding */
+  flex-wrap: nowrap;
+  
+  
+}
+
+.wor {
+  font-weight: lighter;
+  width: 25%; /* 每個項目佔容器寬度的25% */
+  display: inline-block;
+  font-size: 20px;
+  color: black;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: left; /* 靠左對齊 */
+  padding: 10px; /* 增加內邊距 */
+  box-sizing: border-box; /* 包含內邊距和邊框在內 */
+  position: absolute; /* 改為絕對定位 */
+}
+
+.footer .wor:nth-child(1) {
+  left: 0%;
+}
+
+.footer .wor:nth-child(2) {
+  left: 25%;
+}
+
+.footer .wor:nth-child(3) {
+  left: 50%;
+}
+
+.footer .wor:nth-child(4) {
+  left: 75%;
+}
+
+
+  @media (max-width: 768px) {
+    .studio{
+      font-size: 70px;
+    }
+    
+      .container1 {
+          width: 400px; /* 螢幕小於768px時，將容器寬度設為400px */
+      }
+  
+      .sdp {
+          margin-bottom: 100px; /* 調整 sdp 之間的間距 */
+      }
+  
+      /* 圖片保持比例 */
+      .sdp img {
+          width: 100%;  /* 保持圖片寬度100% */
+          height: auto; /* 保持圖片的高度比例 */
+      }
+  
+      /* 文字大小縮小 */
+      .words-container span {
+          font-size: 12px; /* 縮小文字大小 */
+      }
+  
+      /* 文字排列方式不變，仍然是橫向排列 */
+      .words-container {
+          flex-direction: row; /* 保持水平排列 */
+          align-items: center; /* 保持居中對齊 */
+      }
+
+       .footer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 每行顯示兩個元素 */
+    gap: 10px; /* 元素之間的間距 */
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .wor {
+    position: relative;
+    width: 100%;
+    left: 0 !important;
+    padding: 5px 20px;
+    font-size: 10px;
+  }
+
+  
+   
+  }
+
+@media (max-width: 1024px) {
+  
+}
+  .footer {
+    height: 100px;
+    padding: 30px 0 0 15px;
+  }
+
+
+
+
+  

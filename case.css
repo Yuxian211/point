@@ -1,0 +1,411 @@
+* {
+    margin: 0;
+    padding: 0;
+    
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: white;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.vertical-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.line {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #000;
+}
+
+.line:nth-child(1) { left: 25%; }
+.line:nth-child(2) { left: 50%; }
+.line:nth-child(3) { left: 75%; }
+
+/*header*/
+
+
+.header {
+    position: fixed; /* 固定在頁面最上方 */
+    z-index: 1000; /* 保證置於其他元素之上 */
+    width: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  
+    display: flex;
+    justify-content: flex-start; /* 靠左對齊 */
+    align-items: flex-start; /* 靠上對齊 */
+    padding: 50px 0 0 20px; /* 增加左邊和上方的 padding */
+    flex-wrap: nowrap;
+    position: relative;
+    position: fixed;
+    
+}
+s
+
+.main{
+    color: #f88818 !important;
+}
+
+/* 字母樣式 */
+.word {
+    position: absolute;
+    width: 5px; /* Each item takes up 25% of the container's width */
+    height: 100%; /* Adjust as needed */
+
+    display: inline-block;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    position: relative;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: color 0.5s ease; /* 字母本身過渡效果 */
+}
+
+  .header .word:nth-child(1) {
+    left: 0%;
+  }
+  
+  .header .word:nth-child(2) {
+    left: 25%;
+  }
+  
+  .header .word:nth-child(3) {
+    left: 50%;
+  }
+  
+  .header .word:nth-child(4) {
+    left: 75%;
+  }
+.word:hover {
+    color: #f88818; /* 滑鼠懸停時改變字母顏色 */
+}
+
+/* 顯示完整單詞 */
+.word::after {
+    content: attr(data-full); /* 顯示 data-full 的內容 */
+    position: absolute;
+    padding-left: 32px;
+    top: 0; /* 完整單詞與字母對齊 */
+    left: 0;
+    opacity: 0; /* 初始隱藏 */
+    color: #000000;;
+    font-size: 40px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: opacity 0.5s ease, transform 0.5s ease; /* 平滑顯示與移動效果 */
+    transform: translateX(-5px); /* 初始位置向左偏移 */
+}
+
+/* 懸停時動畫效果 */
+.word:hover::after {
+    opacity: 1; /* 顯示完整單詞 */
+    transform: translateX(0); /* 從左滑入至原始位置 */
+}
+
+
+
+/*contant*/
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.title-container {
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 300px;
+    text-align: center;
+    letter-spacing: 10px;
+    display: flex;
+}
+
+.letter {
+    transform: translateY(100%);
+    opacity: 0;
+    display: inline-block;
+}
+
+.subtitle {
+    text-align: center;
+    margin: 20px 0 50px;
+    font-size: 48px;
+    opacity: 0;
+}
+
+
+.image-container {
+    margin: 100px 0;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.caption {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 20px;
+    color: #666;
+}
+
+
+
+/* Button */
+
+.button-wrapper {
+    position: relative;
+    opacity: 0
+}
+
+.custom-button {
+    font-family: Arial, sans-serif;
+    font-size: 48px;
+    color: black;
+    background-color: transparent;
+    border: 0px solid black;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    text-decoration: none; 
+}
+
+.custom-button:hover {
+    color: #f88818;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.custom-button::before {
+    
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.custom-button:hover::before {
+    opacity: 1;
+}
+
+
+/*footer*/
+.footer {
+    
+    width: 100%;
+    height: 120px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: flex-start; /* 靠左對齊 */
+    align-items: flex-start; /* 靠上對齊 */
+    padding: 50px 0 0 20px; /* 增加左邊和上方的 padding */
+    flex-wrap: nowrap;
+    
+   
+}
+
+.wor {
+    font-weight: lighter;
+    width: 25%; /* 每個項目佔容器寬度的25% */
+    display: inline-block;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-align: left; /* 靠左對齊 */
+    padding: 10px; /* 增加內邊距 */
+    box-sizing: border-box; /* 包含內邊距和邊框在內 */
+    position: absolute; /* 改為絕對定位 */
+}
+
+.footer .wor:nth-child(1) {
+    left: 0%;
+}
+
+.footer .wor:nth-child(2) {
+    left: 25%;
+}
+
+.footer .wor:nth-child(3) {
+    left: 50%;
+}
+
+.footer .wor:nth-child(4) {
+    left: 75%;
+}
+
+
+/* Cursor */
+
+#cursor-dot {
+    width: 30px; /* 圓點寬度 */
+    height: 30px; /* 圓點高度 */
+    background: #000000; /* 圓點背景顏色為黑色 */
+    border-radius: 50%; /* 圓點形狀為圓形 */
+    position: fixed; /* 將圓點定位為固定定位 */
+    left: 0; /* 圓點水平位置為最左邊 */
+    top: 0; /* 圓點垂直位置為最上面 */
+    transform: translate(-50%, -50%); /* 將圓點中心點移動到指定位置 */
+    pointer-events: none; /* 讓圓點不響應滑鼠事件 */
+}
+
+#cursor-circle {
+    width: 50px; /* 圓圈寬度 */
+    height: 50px; /* 圓圈高度 */
+    background-color: rgba(255, 255, 255, 0); /* 圓圈背景顏色為透明 */
+    border-radius: 50%; /* 圓圈形狀為圓形 */
+    border: 1px solid #fff; /* 圓圈邊框為白色，寬度為1像素 */
+    box-sizing: border-box; /* 包含邊框在內的寬高 */
+    position: fixed; /* 將圓圈定位為固定定位 */
+    left: 0; /* 圓圈水平位置為最左邊 */
+    top: 0; /* 圓圈垂直位置為最上面 */
+    transform: translate(-50%, -50%); /* 將圓圈中心點移動到指定位置 */
+    pointer-events: none; /* 讓圓圈不響應滑鼠事件 */
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    /* Title 調整 */
+    .title {
+        font-size: 200px;
+    }
+
+    /* Container 寬度調整 */
+    .container {
+        max-width: 700px;
+    }
+
+    /* Header 文字大小調整 */
+    .word {
+        font-size: 32px;
+    }
+
+    .word::after {
+        font-size: 32px;
+        padding-left: 25px;
+    }
+
+    /* 圖片容器高度調整 */
+    .image-wrapper {
+        height: 350px;
+    }
+
+    /* Footer 調整 */
+    .footer {
+        height: 100px;
+        padding: 30px 0 0 15px;
+    }
+
+    .wor {
+        font-size: 16px;
+    }
+
+    /* Button 大小調整 */
+    .custom-button {
+        font-size: 40px;
+    }
+
+    .subtitle {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+
+   
+
+    /* Title 進一步縮小 */
+    .title {
+        font-size: 120px;
+        letter-spacing: 5px;
+    }
+
+    /* Container 調整 */
+    .container {
+        max-width: 90%;
+        padding: 10px;
+    }
+
+   
+
+    /* 圖片相關調整 */
+    .image-container {
+        margin: 50px 0;
+    }
+
+    .image-wrapper {
+        height: 250px;
+    }
+
+    .caption {
+        font-size: 16px;
+    }
+
+    /* Footer 調整為垂直排列 */
+    .footer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 每行顯示兩個元素 */
+        gap: 10px; /* 元素之間的間距 */
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .wor {
+        position: relative;
+        width: 100%;
+        left: 0 !important;
+        padding: 5px 20px;
+        font-size: 10px;
+    }
+    /* Button 和 subtitle 調整 */
+    .custom-button {
+        font-size: 32px;
+    }
+
+   
+
+   }
+

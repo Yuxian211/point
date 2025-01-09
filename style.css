@@ -1,0 +1,694 @@
+body,html{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw; /* 防止超出螢幕寬度 */
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    
+       
+}
+
+#cursor-dot {
+  width: 30px; /* 圓點寬度 */
+  height: 30px; /* 圓點高度 */
+  background: #000000; /* 圓點背景顏色為黑色 */
+  border-radius: 50%; /* 圓點形狀為圓形 */
+  position: fixed; /* 將圓點定位為固定定位 */
+  left: 0; /* 圓點水平位置為最左邊 */
+  top: 0; /* 圓點垂直位置為最上面 */
+  transform: translate(-50%, -50%); /* 將圓點中心點移動到指定位置 */
+  pointer-events: none; /* 讓圓點不響應滑鼠事件 */
+}
+
+#cursor-circle {
+  width: 50px; /* 圓圈寬度 */
+  height: 50px; /* 圓圈高度 */
+  background-color: rgba(255, 255, 255, 0); /* 圓圈背景顏色為透明 */
+  border-radius: 50%; /* 圓圈形狀為圓形 */
+  border: 1px solid #fff; /* 圓圈邊框為白色，寬度為1像素 */
+  box-sizing: border-box; /* 包含邊框在內的寬高 */
+  position: fixed; /* 將圓圈定位為固定定位 */
+  left: 0; /* 圓圈水平位置為最左邊 */
+  top: 0; /* 圓圈垂直位置為最上面 */
+  transform: translate(-50%, -50%); /* 將圓圈中心點移動到指定位置 */
+  pointer-events: none; /* 讓圓圈不響應滑鼠事件 */
+}
+
+.divider{
+   
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    /*width: 1px;*/
+    background-color: black;
+    z-index: 10; /* 將它放置在所有元素之下 */
+}
+
+.line1 {
+    left: 25%; 
+    width: 1px;
+}
+
+.line2 {
+    left: 50%; 
+    width: 1px;
+}
+
+.line3 {
+    right: 25%; 
+    width: 1px;
+}
+
+header {
+    width: 100%;
+    position: relative;
+}
+
+header, .section2, .section3, .section4 {
+  position: relative; /* 保證這些區塊是相對定位，確保其他元素不會影響到線條 */
+  z-index: 1; /* 避免這些區塊遮擋線條 */
+}
+
+
+
+.top-nav {
+    display: flex; /* 使用 Flexbox 排列 */
+    justify-content: space-evenly; /* 平均分配空間 */
+    align-items: center; /* 垂直置中 */
+    position: fixed; /* 固定在頁面最上方 */
+    top: 0;
+    left: 0;
+    width: 100%; /* 占滿寬度 */
+    padding: 10px 0; /* 上下間距 */
+    z-index: 1000; /* 保證置於其他元素之上 */
+    font-size: 20px;
+}
+
+
+
+
+
+.header2 {
+  position: fixed; /* 固定在頁面最上方 */
+  z-index: 1000; /* 保證置於其他元素之上 */
+  width: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+ 
+  display: flex;
+  justify-content: flex-start; /* 靠左對齊 */
+  align-items: flex-start; /* 靠上對齊 */
+  padding: 50px 0 0 20px; /* 增加左邊和上方的 padding */
+  flex-wrap: nowrap;
+  position: relative;
+  position: fixed;
+  
+}
+
+.main{
+  color: #f88818 !important;
+}
+
+
+/* 字母樣式 */
+.word {
+  position: absolute;
+  width: 5px; /* Each item takes up 25% of the container's width */
+  height: 100%; /* Adjust as needed */
+
+  display: inline-block;
+  font-size: 40px;
+  font-weight: bold;
+  color: black;
+  position: relative;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.5s ease; /* 字母本身過渡效果 */
+}
+
+ .header2 .word:nth-child(1) {
+  left: 0%;
+ }
+ 
+ .header2 .word:nth-child(2) {
+  left: 25%;
+ }
+ 
+ .header2 .word:nth-child(3) {
+  left: 50%;
+ }
+ 
+ .header2 .word:nth-child(4) {
+  left: 75%;
+ }
+.word:hover {
+  color: #f88818; /* 滑鼠懸停時改變字母顏色 */
+}
+
+/* 顯示完整單詞 */
+.word::after {
+  content: attr(data-full); /* 顯示 data-full 的內容 */
+  position: absolute;
+  padding-left: 32px;
+  top: 0; /* 完整單詞與字母對齊 */
+  left: 0;
+  opacity: 0; /* 初始隱藏 */
+  color: #000000;;
+  font-size: 40px;
+  font-weight: bold;
+  white-space: nowrap;
+  transition: opacity 0.5s ease, transform 0.5s ease; /* 平滑顯示與移動效果 */
+  transform: translateX(-5px); /* 初始位置向左偏移 */
+}
+
+/* 懸停時動畫效果 */
+.word:hover::after {
+  opacity: 1; /* 顯示完整單詞 */
+  transform: translateX(0); /* 從左滑入至原始位置 */
+}
+
+
+
+header {
+    display: flex;
+    flex-direction: column;  /* 讓子元素垂直排列 */
+    justify-content: center; /* 垂直居中 */
+    align-items: center;     /* 水平居中 */
+    height: 100vh;           /* 設定高度為視口高度，讓內容居中 */
+  }
+
+.CHAIR{
+    font-size: 100px;
+    font-weight: bold;
+    align-items: center;
+
+}
+
+.button-wrapper {
+  position: relative;
+  opacity: 0
+}
+
+.button-wrapper2 {
+  position: relative;
+  opacity: 0
+}
+
+.custom-button {
+  font-family: Arial, sans-serif;
+  font-size: 48px;
+  color: black;
+  background-color: transparent;
+  border: 0px solid black;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  text-decoration: none; 
+}
+
+.custom-button2 {
+  font-family: Arial, sans-serif;
+  font-size: 48px;
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  border: 0px solid rgb(195, 193, 193);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  text-decoration: none; 
+}
+
+.custom-button:hover {
+  color: #f88818;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.custom-button2:hover {
+  color: #f88818;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.custom-button::before {
+  
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.custom-button2::before {
+  
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.custom-button:hover::before {
+  opacity: 1;
+}
+
+.custom-button2:hover::before {
+  opacity: 1;
+}
+
+
+
+
+section {
+  height: 100vh;
+  display: flex;
+  }
+
+.section2{
+  
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.introcduction {
+    max-width: 650px;  /* 設定最大寬度以便控制內容大小 */
+    width: 100%; /* 讓內容填滿可用空間 */
+    text-align: center; /* 讓文字在容器內部水平居中 */
+    font-size: 25px;
+  }
+
+  .section3{
+    overflow: hidden; /* 隱藏超出容器範圍的部分 */
+    display: flex; /* 設為 flex 佈局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100vh; /* 設為視窗高度 */
+    position: relative;
+    
+  }
+
+  .hot-furniture {
+    position: absolute; /* 圖片設置絕對定位 */
+    
+    top: 50%; /* 垂直方向移動至容器的中間 */
+    left: 50%; /* 水平方向移動至容器的中間 */
+    transform: translate(-50%, -50%); /* 將圖片自身偏移，使其中心點對齊容器中心 */
+    z-index: -1; /* 將它放置在所有元素之下 */
+  }
+
+  .hot-furniture img{
+  width: 640px; /* 統一圖片寬度 */
+  height: 360px; /* 統一圖片高度 */
+  object-fit: cover; /* 確保圖片比例正確 */
+  z-index: -1; /* 將它放置在所有元素之下 */
+  }
+
+
+
+  .SHOWCASE{
+    display: flex; /* 使用 Flexbox */
+    justify-content: space-between; /* 子元素分布在兩側 */
+    align-content: center; /* 垂直居中對齊 */
+    width: 100%;
+    height: 100vh;
+    position: static;
+    white-space: nowrap;
+    font-size: clamp(70px, 10vw, 170px);
+    font-weight: bold;
+    color: #333;
+  }
+
+  .SHOW{
+    position: absolute; /* 使用絕對定位 */
+    left: -500px; /* 將元素移出螢幕左側 */
+    top: 80%; /* 垂直位置可以根據需求調整 */
+    transform: translateY(-50%); /* 確保垂直方向居中 */
+    margin: 0; /* 移除外間距 */
+    padding: 0; /* 移除內間距 */
+    text-align: left; /* 文本向左對齊 */
+    text-shadow: 2px 2px 5px rgba(206, 194, 194, 0.3);
+    
+    
+  }
+
+  .CASE{
+    position: absolute; /* 使用絕對定位 */
+    right: -500px; /* 將元素移出螢幕右側 */
+    top: 80%; /* 垂直位置可以根據需求調整 */
+    transform: translateY(-50%); /* 確保垂直方向居中 */
+    margin: 0; /* 移除外間距 */
+    padding: 0; /* 移除內間距 */
+    text-align: right; /* 文本向右對齊 */
+    text-shadow: 2px 2px 5px rgba(206, 194, 194, 0.3);
+    
+    
+  }
+
+  .section3{
+    
+    z-index: -2; /* 將它放置在所有元素之下 */
+    height: 100vh;
+  }
+
+ 
+  .section4 {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    /*background-color: khaki;*/
+    padding: 20px;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.PROJECT {
+    position: relative;
+    /*background-color: aqua;*/
+    text-align: center;
+    margin-top: 130px;
+    height: 48px;
+}
+
+.PROJECT h3 {
+    font-size: 48px;
+    margin: 0;
+}
+
+.PROJECT-PIC {
+  display: flex; /* 水平排列 */
+  justify-content: space-between; /* 平均分配空間 */
+  align-items: flex-start; /* 讓內容頂部對齊 */
+  gap: 20px; /* 區塊間距，可根據需求調整 */
+  margin: 50px;
+  width: 1200px;
+  
+  /*background-color: aquamarine;*/
+}
+
+.PIC {
+  flex: 1; /* 每個區塊均分 */
+  text-align: center; /* 文字置中 */
+}
+
+.PROJECT-PIC img {
+    display: flex;
+    
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    flex-shrink: 0;
+    
+    box-shadow: 0px 4px 10px rgb(255, 255, 255);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.PROJECT-PIC img:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+.PROJECT-PIC p{
+  letter-spacing: 3px;
+  word-spacing: 3px;
+  
+}
+
+.section5{
+  position: relative;
+  display: flex;
+  flex-direction: column;  /* 讓子元素垂直排列 */
+  justify-content: center; /* 垂直居中 */
+  align-items: center;     /* 水平居中 */
+  height: 100vh;
+  /*z-index: -2;
+  /*background-color:khaki;*/
+  
+
+}
+
+
+.CASE2 {
+  position: relative;
+  text-align: center;
+  /*background-color: aquamarine;*/
+  height: 170px;
+}
+
+.CASE2 h1{
+  z-index: 9999;
+  margin-top: 100px;
+  font-size: 150px;
+}
+
+
+
+.CASE-PIC img {
+  max-width: 400px;
+  max-height: 300px;
+  width: auto; /* 自動調整寬度以保持比例 */
+  height: auto; /* 自動調整高度以保持比例 */
+  margin-top: 100px;
+  flex-shrink: 0;
+  box-shadow: 0px 4px 10px rgb(255, 255, 255);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.CASE-PIC img:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+.section6{
+  position: relative;
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* 隱藏超出容器範圍的部分 */
+
+}
+
+.circle img {
+  position: absolute; /* 圖片設置絕對定位 */
+  top: 50%; /* 垂直方向移動至容器的中間 */
+  left: 50%; /* 水平方向移動至容器的中間 */
+  transform: translate(-50%, -50%); /* 將圖片自身偏移，使其中心點對齊容器中心 */
+  z-index: -1; /* 將它放置在所有元素之下 */
+  
+  width: 10vw; /* 自動調整寬度以保持比例 */
+  height: auto; /* 自動調整高度以保持比例 */
+}
+
+.fontbox {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;  /* 確保子元素垂直排列 */
+  align-items: center;     /* 水平居中 */
+}
+
+.title h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 170px;
+  order: 1;
+  margin-bottom: 10px; /* 增加間距讓下一段有空隙 */
+  height: auto;  /* 高度根據字體大小自動調整 */
+  max-height: 170px;
+  color: white;
+}
+
+.content2 {
+  font-size: 24px;
+  order: 2;
+  margin-bottom: 30px; /* 增加間距讓下一段有空隙 */
+  height: auto;  /* 高度根據字體大小自動調整 */
+  max-height: 40px;
+  color: white;
+
+}
+
+.button-wrapper2 {
+  
+  font-size: 48px;
+  order: 3;
+  height: auto;  /* 高度根據字體大小自動調整 */
+  max-height: 40px;
+  color: white;
+
+}
+
+
+.section7{
+  height: auto;
+  background-color: #000000;
+}
+
+.footer {
+  
+  width: 100%;
+  height: 120px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: flex-start; /* 靠左對齊 */
+  align-items: flex-start; /* 靠上對齊 */
+  padding: 50px 0 0 20px; /* 增加左邊和上方的 padding */
+  flex-wrap: nowrap;
+  
+  
+}
+
+.wor {
+  font-weight: lighter;
+  width: 25%; /* 每個項目佔容器寬度的25% */
+  display: inline-block;
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: left; /* 靠左對齊 */
+  padding: 10px; /* 增加內邊距 */
+  box-sizing: border-box; /* 包含內邊距和邊框在內 */
+  position: absolute; /* 改為絕對定位 */
+}
+
+.footer .wor:nth-child(1) {
+  left: 0%;
+}
+
+.footer .wor:nth-child(2) {
+  left: 25%;
+}
+
+.footer .wor:nth-child(3) {
+  left: 50%;
+}
+
+.footer .wor:nth-child(4) {
+  left: 75%;
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+ .CHAIR{
+   font-size: 70px;
+  }
+
+  .SHOW{
+    left: -300px; /* 減少文字偏移量 */
+  }
+
+  .CASE{
+    right: -300px; /* 減少文字偏移量 */
+  }
+
+  .custom-button {
+    font-size: 32px;
+  }
+
+  .custom-button2 {
+    font-size: 32px;
+  }
+
+  
+
+  .wor {
+    font-size: 2px;
+  }
+    
+  
+  
+
+  
+}
+
+@media (max-width: 1024px) {
+  .section4 {
+      height: auto; /* 容器高度自動調整 */
+  }
+
+  .PROJECT-PIC {
+      flex-direction: column; /* 改為垂直排列 */
+      justify-content: flex-start; /* 垂直排列時對齊至頂部 */
+      gap: 20px; /* 增加區塊間距 */
+      margin: 20px auto; /* 使整體區塊水平方向居中 */
+      width: 90%; /* 設定區塊寬度以使其在畫面中居中 */
+  }
+
+  /* 每個圖片區塊改為相同寬度 */
+  .PIC {
+      width: 100%; /* 讓圖片區塊充滿寬度 */
+      text-align: center;
+  }
+
+  .PROJECT-PIC img {
+      width: 90vw; /* 圖片寬度為螢幕寬度的 90% */
+      height: auto; /* 高度自動調整，保持比例 */
+      object-fit: contain; /* 保持圖片比例，避免變形 */
+  }
+
+  .PROJECT h3 {
+      font-size: 32px; /* 調整標題文字大小 */
+  }
+
+  .PROJECT-PIC p {
+      font-size: 16px; /* 調整文字大小 */
+  }
+
+  .title h1{
+    font-size: 130px;
+  }
+
+  .content2{
+    font-size: 24px;
+  }
+
+  .studio-buttom{
+    font-size: 48px;
+  }
+
+  .custom-button {
+    font-size: 40px;
+  }
+
+  .custom-button2 {
+    font-size: 40px;
+  }
+
+  .footer {
+    height: 100px;
+    padding: 30px 0 0 15px;
+  }
+
+  .wor{
+    font-size: 15px
+  }
+}
+
